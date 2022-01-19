@@ -1,36 +1,25 @@
-import React, { useState, useEffect } from "react";
-import Card from "./components/Card";
-import Navbar from "./components/Navbar";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./layout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
+import Error404 from "./pages/Error404";
 
 const App = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const response = await fetch("https://rickandmortyapi.com/api/character");
-      const json = await response.json();
-      setData(json.results);
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
   return (
-    <div>
-      <Navbar />
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <>
-          {data.map((item) => (
-            <Card key={item.id} {...item} />
-          ))}
-        </>
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="profile/:username" element={<Profile />} />
+        </Route>
+        <Route path="*" element={<Error404 />} />
+      </Routes>
+    </Router>
   );
 };
 

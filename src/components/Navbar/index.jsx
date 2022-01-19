@@ -1,16 +1,27 @@
-import React from 'react'
-import "./index.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import { AppBar, Typography, Stack } from "@mui/material";
+import "./index.css";
 
 const Navbar = () => {
-    return (
-        <div className='navbar'>
-            <div className='navbar__links'>
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </div>
-        </div>
-    )
-}
+  return (
+    <AppBar sx={{ padding: 3 }} position="static">
+      <Stack direction="row" justifyContent="space-between">
+        <Typography>
+          <Link to="/">Home</Link>
+        </Typography>
+        <Typography>
+          <Link to="/about">About</Link>
+        </Typography>
+        <Typography>
+          <Link to="/contact">Contact</Link>
+        </Typography>
+        <Typography>
+          <Link to="/profile">Profile</Link>
+        </Typography>
+      </Stack>
+    </AppBar>
+  );
+};
 
-export default Navbar
+export default Navbar;
